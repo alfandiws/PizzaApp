@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,16 +24,28 @@ class LoginActivity : AppCompatActivity() {
         //event button login
         btnLogin.setOnClickListener {
             val databaseHelper = DatabaseHelper(this)
-
+             val data:String= databaseHelper.checkData("Alfandi@students.amikom.ac.id")
+            Toast.makeText(this@LoginActivity,"Result :"+data,
+            Toast.LENGTH_SHORT).show()
+            if(data == null){
+                databaseHelper.addAccount("alfandi@students.amikom.ac.id",
+                "Alfandi", "cashier","1234")
+            }
             val email = txtUsername.text.toString().trim()
             val password = txtPassword.text.toString().trim()
 
             val result:Boolean = databaseHelper.checkLogin(email,password)
-            if (result == true){
-
+            if (result == true) {
+                Toast.makeText(
+                    this@LoginActivity, "Login Success",
+                    Toast.LENGTH_SHORT
+                ).show()
+                val intentLogin = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intentLogin)
+            }else{
+                Toast.makeText(this@LoginActivity,"Login Failed, Try Again!!",
+                    Toast.LENGTH_SHORT).show()
             }
-            val intentLogin = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentLogin)
         }
     }
 }
