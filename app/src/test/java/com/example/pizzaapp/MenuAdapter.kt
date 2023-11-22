@@ -1,7 +1,5 @@
 package com.example.pizzaapp
 
-import android.content.Context
-import android.graphics.ColorSpace.Model
 import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

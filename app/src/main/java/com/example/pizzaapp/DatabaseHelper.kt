@@ -21,6 +21,14 @@ class DatabaseHelper (var context: Context): SQLiteOpenHelper(
         private val COLUMN_NAME = "name"
         private val COLUMN_LEVEL = "level"
         private val COLUMN_PASSWORD = "password"
+
+        //table menu
+        private val TABLE_MENU = "menu"
+        //column menu table
+        private val COLUMN_ID_MENU = "idMenu"
+        private val COLUMN_NAMA_MENU = "menuName"
+        private val COLUMN_PRICE_MENU = "price"
+        private val COLUMN_IMAGE = "photo"
     }
 
     private val CREATE_ACCOUNT_TABLE = ("CREATE TABLE"+TABLE_ACCOUNT+"("
