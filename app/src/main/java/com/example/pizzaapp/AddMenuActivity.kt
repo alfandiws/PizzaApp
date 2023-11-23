@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,7 +18,33 @@ class AddMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_menu)
         //hide title bar
         getSupportActionBar()?.hide()
+
+        //instance
+        val image = findViewById(R.id.imageMenu)
+        val textId : EditText = findViewById(R.id.menuId)
+        val textName : EditText = findViewById(R.id.menuName)
+        val textPrice : EditText = findViewById(R.id.menuPrice)
+        val btnAddImage: Button = findViewById(R.id.buttonAddImage)
+        val btnSaveMenu: Button = findViewById(R.id.buttonSaveMenu)
+
+        //event saat button add(+) di-klik
+        btnAddImage.setOnClickListener{
+            pickImageGalery()
+        }
     }
+    private fun pickImageGalery(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            image.setImageURI(data?.data)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
