@@ -1,6 +1,8 @@
 package com.example.pizzaapp
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pizzaapp.model.MenuModel
 
 class AddMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +47,18 @@ class AddMenuActivity : AppCompatActivity() {
             image.setImageURI(data?.data)
         }
     }
+    btnSaveMenu.setOnCLickListener{
+        //object class databaseHelper
+        val databaseHelper = DatabaseHelper(this)
+        val id : Int = textId.text.toString().toInt()
+        val name : String = textName.text.toString().trim()
+        val price : Int = textPrice.text.toString().toInt()
+        val bitmapDrawable : BitmapDrawable = image.drawable as BitmapDrawable
+        val bitmap : Bitmap = bitmapDrawable.bitmap
 
+        val menuModel = MenuModel(id,name,price,bitmap)
+        databaseHelper.addMenu(menuModel)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
