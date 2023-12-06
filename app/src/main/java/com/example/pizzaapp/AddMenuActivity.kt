@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pizzaapp.model.MenuModel
 
 class AddMenuActivity : AppCompatActivity() {
+    lateinit var image : ImageView
+    companion object{
+        val IMAGE_REQUEST_CODE = 100
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_menu)
